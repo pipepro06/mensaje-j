@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta para J 💌</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(to bottom, #ffe6f0, #ffd1dc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Segoe UI', sans-serif;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .envelope {
+      position: relative;
+      width: 380px;
+      height: 260px;
+      background: #ff4d6d;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .envelope:hover {
+      transform: scale(1.03);
+    }
+
+    .flap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 130px;
+      background: #ff99ac;
+      clip-path: polygon(0 0, 50% 100%, 100% 0);
+      transform-origin: top center;
+      transition: transform 1s ease-in-out;
+      z-index: 2;
+    }
+
+    .letter {
+      position: absolute;
+      top: 130px;
+      left: 15px;
+      width: 350px;
+      height: 200px;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+      transform: translateY(250px);
+      transition: transform 1s ease-in-out 0.5s;
+      z-index: 1;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .letter.open {
+      transform: translateY(-100px);
+    }
+
+    .flap.open {
+      transform: rotateX(180deg);
+    }
+
+    .message {
+      font-size: 16px;
+      color: #333;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .message span {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+      color: #e6005c;
+      font-size: 20px;
+    }
+
+    .music-btn,
+    .reset-btn {
+      position: absolute;
+      bottom: 20px;
+      background: #e6005c;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    .music-btn:hover,
+    .reset-btn:hover {
+      background: #c4004a;
+    }
+
+    .music-btn {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    .reset-btn {
+      right: 20px;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      transform: rotate(45deg);
+      animation: float 8s linear infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+    }
+
+    .heart::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart::after {
+      left: -10px;
+      top: 0;
+    }
+
+    @keyframes float {
+      0% {
+        bottom: -20px;
+        opacity: 0;
+        transform: translateX(0) rotate(45deg);
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        bottom: 100%;
+        transform: translateX(50px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Corazones decorativos -->
+<div class="heart" style="left: 10%; animation-delay: 0s;"></div>
+<div class="heart" style="left: 30%; animation-delay: 2s;"></div>
+<div class="heart" style="left: 60%; animation-delay: 4s;"></div>
+<div class="heart" style="left: 80%; animation-delay: 6s;"></div>
+<div class="envelope" onclick="openEnvelope()">
+  <div class="flap" id="flap"></div>
+  <div class="letter" id="letter">
+    <div class="message">
+      <b>Mi REINA 🩵</b> <br><br>
+      <em>Desde que llegaste, le diste color a mi mundo, paz a mi mente y alegría a mi corazón.  
+      Eres la razón por la que sonrío cada día. Esta carta es solo una forma de recordarte  
+      lo especial que eres para mí. 💌</em> <b>Att:EL Chico que te Ama</b>
+      <br><br>
+      Gracias por existir y estar en mi vida.  
+      <span>Con amor, Adrián 💘</span>
+    </div>
+  </div>
+</div>
+
+<!-- Botones -->
+<button class="music-btn" onclick="playMusic()">🎵 Reproducir canción</button>
+<button class="reset-btn" onclick="resetCard()">🔁 Volver a leer</button>
+
+<!-- Audio -->
+<audio id="music" src="https://www.dropbox.com/scl/fi/24ry7h7eya3ej5xdtuom0/Arctic-Monkeys-I-Wanna-Be-Yours-Instrumental-Meekail.mp3?rlkey=cvv4eo25jxziv5k58h3t7mzna&st=c6ueqxce&dl=1" type="audio/mpeg"></audio>
+
+<script>
+  function openEnvelope() {
+    document.getElementById('flap').classList.add('open');
+    document.getElementById('letter').classList.add('open');
+  }
+
+  function playMusic() {
+    const audio = document.getElementById('music');
+    audio.play();
+  }
+
+  function resetCard() {
+    document.getElementById('flap').classList.remove('open');
+    document.getElementById('letter').classList.remove('open');
+    document.getElementById('music').pause();
+    document.getElementById('music').currentTime = 0;
+  }
+</script>
+
+</body>
+</html>
